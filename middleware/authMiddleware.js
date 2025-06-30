@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const authMiddleware = (req, res, next) => {
-  
+  cl
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
