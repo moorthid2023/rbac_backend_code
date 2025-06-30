@@ -6,6 +6,7 @@ import {
   deleteStudentById,
   searchStudent,
   paginateStudents,
+  getStudentByEmail
 } from "../repositories/studenRepositories.js";
 
 export const createStudentService = async (data) => {
@@ -32,6 +33,13 @@ export const getAllStudentsService = async () => {
 export const getStudentByIdService = async (id) => {
   return getStudentById(id);
 };
+export const getStudentByEmailService = async(email)=>{
+  if(!email){
+    res.status(400).json({message:"email required !"});
+  }
+  const result = getStudentByEmail(email);
+  return result;
+}
 export const updateStudentByIdService = async (id, data) => {
   if (!data) {
     res.status(400).json({ message: "data required" });

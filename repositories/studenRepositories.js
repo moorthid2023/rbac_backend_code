@@ -60,4 +60,14 @@ export const searchStudent = async (query) => {
     }
 };
 
+export const getStudentByEmail = async(email)=>{
+    try {
+        const db = await connectMongo();
+        let data = await db.collection('students').findOne({email})
+        return data;
+    } catch (error) {
+        console.log("error connecting to getstudent by email",error);
+    }
+}
+
 export const paginateStudents = async()=>{};

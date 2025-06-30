@@ -1,4 +1,4 @@
-import { createStudentService,getAllStudentsService,getStudentByIdService,searchStudentService,updateStudentByIdService,deleteStudentByIdService,paginateStudentsService } from "../services/studentService.js";
+import { createStudentService,getAllStudentsService,getStudentByIdService,searchStudentService,updateStudentByIdService,deleteStudentByIdService,paginateStudentsService,getStudentByEmailService } from "../services/studentService.js";
 
 export const createStudent = async (req, res) => {
     try{
@@ -38,6 +38,15 @@ export const updateStudentById = async (req, res) => {
         console.log("error in update student controller ",error);
     }
 };
+export const getStudentByEmail = async(req,res)=>{
+    try {
+        const email = req.user.email;
+        const result = await getStudentByEmailService(email);
+        res.status(200).json({result})
+    } catch (error) {
+        console.log("error in getstudent by email",error);
+    }
+}
 export const deleteStudentById = async (req, res) => {};
 export const searchStudents = async (req, res) => {
      try{

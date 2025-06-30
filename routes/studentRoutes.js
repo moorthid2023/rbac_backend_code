@@ -5,16 +5,20 @@ import {
   createStudent,
   updateStudentById,
   deleteStudentById,
-  searchStudents
+  searchStudents,
+  getStudentByEmail
 } from '../controllers/studentController.js';
-// import authMiddleware from '../middleware/authMiddleware.js';
-// import roleMiddleware from '../middleware/roleMiddleware.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+import roleMiddleware from '../middleware/roleMiddleware.js';
+
 
 const router = express.Router();
 
+router.get('/profile',authMiddleware,roleMiddleware(['student']),getStudentByEmail)
+
 // Apply auth and restrict access to "admin" and "faculty"
-// router.use(authMiddleware);
-// router.use(roleMiddleware(['admin', 'faculty']));
+router.use(authMiddleware);
+router.use(roleMiddleware(['admin', 'faculty']));
 router.get('/query',searchStudents);
 router.get('/', getAllStudents);
 router.get('/:id', getStudentById);
