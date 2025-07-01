@@ -2,7 +2,6 @@
 // export const loginService = async ({ email, password }) => {};
 // export const getProfileService = async (userId) => {}; // Optional
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { findUserByEmail, createUser } from '../repositories/authRepositories.js';
 
 export const registerService = async ({ name, email, password, role }) => {
@@ -18,10 +17,6 @@ export const loginService = async ({ email, password }) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) throw new Error('Invalid credentials');
   // Generate JWT
-  const token = jwt.sign(
-    { id: user._id, email: user.email, role: user.role },
-    process.env.JWT_SECRET,
-    { expiresIn: '1d' }
-  );
-  return { token, role: user.role, name: user.name };
+
+  return { id:user.id, role: user.role, name: user.name };
 };

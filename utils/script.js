@@ -1,6 +1,9 @@
 import connectMongo from './mongoClient.js';
 import bcrypt from 'bcryptjs';
 
+
+
+
 const DEFAULT_PASSWORD = 'ChangeMe123'; // Set a default password if missing
 
 const migrate = async () => {
@@ -32,7 +35,7 @@ const migrate = async () => {
   }
 
   // Migrate faculties
-  const faculties = await db.collection('faculties').find().toArray();
+  const faculties = await db.collection('faculty').find().toArray();
   for (const f of faculties) {
     let password = f.password;
     if (!password) {
