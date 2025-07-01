@@ -1,4 +1,4 @@
-import { createFaculty,getAllFaculty,searchFaculty,getFacultyById } from "../repositories/facultyRepositories.js";
+import { createFaculty,getAllFaculty,searchFaculty,getFacultyById, getFacultyByEmail } from "../repositories/facultyRepositories.js";
 
 export const createFacultyService = async (data) => {
     if (!data.name || !data.email) {
@@ -24,6 +24,13 @@ export const getAllFacultyService = async () => {
 export const getFacultyByIdService = async (id) => {
     return getFacultyById(id)
 };
+export const getFacultyByEmailService = async(email)=>{
+  if(!email){
+    console.log("faculty email required")
+  }
+  const result =await getFacultyByEmail(email);
+  return result;
+}
 export const updateFacultyByIdService = async (id, data) => {};
 export const deleteFacultyByIdService = async (id) => {};
 export const searchFacultyService = async (query) => {

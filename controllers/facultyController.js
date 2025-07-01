@@ -1,4 +1,4 @@
-import { createFacultyService,getAllFacultyService, searchFacultyService ,getFacultyByIdService} from "../services/facultyService.js";
+import { createFacultyService,getAllFacultyService, searchFacultyService ,getFacultyByIdService, getFacultyByEmailService} from "../services/facultyService.js";
 
 export const createFaculty = async (req, res) => {
     try{
@@ -29,7 +29,25 @@ export const getFacultyById = async (req, res) => {
             console.log("error in getstudent by id ",error)
         }
 };
-export const updateFacultyById = async (req, res) => {};
+export const updateFacultyById = async (req, res) => {
+     try {
+            const email = req.user.email;
+            const result = await getStudentByEmailService(email);
+            res.status(200).json({result})
+        } catch (error) {
+            console.log("error in getstudent by email",error);
+        }
+};
+export const getFacultyByEmail = async(req,res)=>{
+    try {
+        const email = req.user.email;
+        const result = await getFacultyByEmailService(email);
+        res.status(200).json({result})
+    } catch (error) {
+        console.log("error in getstudent by email",error);
+         res.status(500).json({ error: 'Server error' });
+    }
+}
 export const deleteFacultyById = async (req, res) => {};
 export const searchFaculty = async (req, res) => {
     try {

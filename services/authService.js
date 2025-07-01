@@ -18,5 +18,5 @@ export const loginService = async ({ email, password }) => {
   if (!match) throw new Error('Invalid credentials');
   // Generate JWT
 
-  return { id:user.id, role: user.role, name: user.name };
+  return { id:user.id, role: user.role, name: user.name ,email:user.email};
 };

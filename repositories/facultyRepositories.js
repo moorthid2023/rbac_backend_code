@@ -29,7 +29,19 @@ export const getFacultyById = async (id) => {
         console.log("error in faculty search by id ",id);
     }
 };
-export const updateFacultyById = async (id, updateData) => {};
+export const updateFacultyById = async (id, updateData) => {
+     try{
+    const db = await connectMongo();
+    if('_id' in updateData){
+        delete updateData._id;
+    }
+    let  data =  await db.collection('faculty').updateOne({_id:new ObjectId(id)},{$set:updateData});
+    return data;
+    }catch(err){
+        console.log(" error in update facultyRepo",err)
+    }
+
+};
 export const deleteFacultyById = async (id) => {};
 export const searchFaculty = async (query) => {
     try {
@@ -40,3 +52,14 @@ export const searchFaculty = async (query) => {
         console.log("error connecting to search faculty ",error);
     }
 };
+export const getFacultyByEmail = async(email)=>{
+    try {
+        
+        const db = await connectMongo();
+        let data = await db.collection('faculty').findOne({email})
+        
+        return data;
+    } catch (error) {
+        console.log("error connecting to get faculty by email",error);
+    }
+}
